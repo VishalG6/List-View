@@ -13,17 +13,40 @@ import android.widget.TextView;
  */
 class customAdapter extends ArrayAdapter<String> {
 
+    private final String[] foods;
+    private final Integer[] imgid;
 
-    public customAdapter(Context context, String[] foods) {
+
+    public customAdapter(Context context, String[] foods, Integer[] imgid) {
         super(context, R.layout.custom_row ,foods);
+
+        this.foods=foods;
+        this.imgid=imgid;
     }
 
-    @Override
+    public View getView(int position,View view,ViewGroup parent) {
+        LayoutInflater inflater= LayoutInflater.from(getContext());
+        View rowView=inflater.inflate(R.layout.custom_row, null,true);
+
+        TextView vishText = (TextView) rowView.findViewById(R.id.vishText);
+        ImageView vishImage = (ImageView) rowView.findViewById(R.id.vishImage);
+
+        vishText.setText(foods[position]);
+        vishImage.setImageResource(imgid[position]);
+        return rowView;
+
+    }
+}
+
+
+
+   /** @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater vishInflater =  LayoutInflater.from(getContext());
         View customView = convertView;
         if(customView == null){
             customView = vishInflater.inflate(R.layout.custom_row, parent, false);
+
         }
 
         String singleFoodItem = getItem(position);
@@ -32,7 +55,4 @@ class customAdapter extends ArrayAdapter<String> {
 
         vishText.setText(singleFoodItem);
         vishImage.setImageResource(R.mipmap.apple);
-        return customView;
-
-    }
-}
+        return customView; */
